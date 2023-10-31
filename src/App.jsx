@@ -1,12 +1,15 @@
 import "./App.css";
+import GalleryGrid from "./components/GalleryGrid/GalleryGrid";
+import TopBar from "./components/TopBar/TopBar";
 
 function App() {
   return (
-    <>
-      <section>
-        <h1 className="text-5xl text-center">Hello World</h1>
-      </section>
-    </>
+    <main>
+      {/* top bar section */}
+      <TopBar />
+      {/* gallery grid section */}
+      <GalleryGrid />
+    </main>
   );
 }
 
