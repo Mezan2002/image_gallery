@@ -1,53 +1,12 @@
-import { useState } from "react";
-import Image1 from "../../assets/images/image-1.webp";
-import Image10 from "../../assets/images/image-10.jpeg";
-import Image11 from "../../assets/images/image-11.jpeg";
-import Image2 from "../../assets/images/image-2.webp";
-import Image3 from "../../assets/images/image-3.webp";
-import Image4 from "../../assets/images/image-4.webp";
-import Image5 from "../../assets/images/image-5.webp";
-import Image6 from "../../assets/images/image-6.webp";
-import Image7 from "../../assets/images/image-7.webp";
-import Image8 from "../../assets/images/image-8.webp";
-import Image9 from "../../assets/images/image-9.webp";
 import "./GalleryGrid.css";
 
-const GalleryGrid = () => {
-  // fake images data using the given images start
-  const imagesData = [
-    { id: 1, imageSrc: Image1 },
-    { id: 2, imageSrc: Image2 },
-    { id: 3, imageSrc: Image3 },
-    { id: 4, imageSrc: Image4 },
-    { id: 5, imageSrc: Image5 },
-    { id: 6, imageSrc: Image6 },
-    { id: 7, imageSrc: Image7 },
-    { id: 8, imageSrc: Image8 },
-    { id: 9, imageSrc: Image9 },
-    { id: 10, imageSrc: Image10 },
-    { id: 11, imageSrc: Image11 },
-  ];
-  // fake images data using the given images end
-
-  // states start
-  const [newImage, setNewImage] = useState(null);
-  const [selectedImages, setSelectedImages] = useState([]);
-  // states end
-
-  // handler functions start
-
-  // checkbox handler
-  const handleCheckboxChange = (isChecked, imageId) => {
-    if (isChecked && !selectedImages.includes(imageId)) {
-      setSelectedImages([...selectedImages, imageId]);
-    } else {
-      const updatedImages = selectedImages.filter((id) => id !== imageId);
-      setSelectedImages(updatedImages);
-    }
-  };
-
-  // handler functions end
-
+const GalleryGrid = ({
+  handleCheckboxChange,
+  imagesData,
+  selectedImages,
+  setSelectedImages,
+  newImage,
+}) => {
   return (
     <section className="p-8">
       {/* main grid */}
@@ -119,16 +78,16 @@ const GalleryGrid = () => {
                   htmlFor="addNewImage"
                   className="flex items-center justify-center h-full flex-col-reverse cursor-pointer"
                 >
-                  <h2 className="text-center mt-4 text-sm capitalize">
+                  <h2 className="text-center mt-4 text-sm font-semibold uppercase">
                     Add New Image
                   </h2>
                   <figure>
                     <img
                       loading="lazy"
                       draggable={false}
-                      src="https://i.ibb.co/zxPs4Tq/gallery.png"
+                      src="https://i.ibb.co/4WHRpmx/image-10.png"
                       alt=""
-                      className="w-7"
+                      className="w-10"
                     />
                   </figure>
                 </label>
