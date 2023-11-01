@@ -1,16 +1,17 @@
+import PropTypes from "prop-types";
 import "./GalleryGrid.css";
 
 const GalleryGrid = ({
   handleCheckboxChange,
   imagesData,
   selectedImages,
-  setSelectedImages,
+  handleAddNewImage,
   newImage,
 }) => {
   return (
     <section className="p-8">
       {/* main grid */}
-      <div className="container grid grid-cols-2 p-4 mx-auto md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div className="container grid grid-cols-2 mx-auto md:grid-cols-4 lg:grid-cols-5 gap-4">
         {/* images data loopings by using map */}
         {imagesData.map((image) => (
           <label
@@ -31,7 +32,7 @@ const GalleryGrid = ({
             <img
               src={image.imageSrc}
               alt=""
-              className="rounded-3xl shadow-md group-hover:duration-1000"
+              className="rounded-3xl h-full w-full object-cover object-center shadow-md group-hover:duration-1000"
             />
             {/* shadow that comes on the hover */}
             <div
@@ -92,7 +93,7 @@ const GalleryGrid = ({
                   </figure>
                 </label>
                 <input
-                  //   onChange={handleCoverImage}
+                  onChange={handleAddNewImage}
                   type="file"
                   id="addNewImage"
                   className="hidden invisible"
@@ -112,6 +113,14 @@ const GalleryGrid = ({
       </div>
     </section>
   );
+};
+// vite gives some type error that why those codes
+GalleryGrid.propTypes = {
+  handleCheckboxChange: PropTypes.func.isRequired,
+  imagesData: PropTypes.array.isRequired,
+  selectedImages: PropTypes.array.isRequired,
+  handleAddNewImage: PropTypes.func.isRequired,
+  newImage: PropTypes.string,
 };
 
 export default GalleryGrid;

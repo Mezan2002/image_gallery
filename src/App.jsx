@@ -35,7 +35,7 @@ function App() {
 
   const [newImage, setNewImage] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
-
+  console.log(imagesData);
   // states end
 
   // handler functions start
@@ -60,8 +60,33 @@ function App() {
         (image) => !selectedImagesId.includes(image.id)
       );
       setImagesData(updatedImages);
-      // Clear the selected images after deletion
+      // Clear the selected images after deleting
       setSelectedImages([]);
+    }
+  };
+
+  // function to handle adding a new image
+  const handleAddNewImage = (event) => {
+    // checking the max id value of the images data array
+    const maxId = imagesData.reduce(
+      (max, image) => (image.id > max ? image.id : max),
+      0
+    );
+    // getting the new image as a file
+    const file = event.target.files[0];
+    // create a new FileReader
+    const reader = new FileReader();
+    // create a new image data
+    reader.onloadend = () => {
+      const newImageData = {
+        id: maxId + 1,
+        imageSrc: reader.result,
+      };
+      // setting the new data in the images data array in the mutalbe way
+      setImagesData([...imagesData, newImageData]);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
 
@@ -81,6 +106,7 @@ function App() {
         setSelectedImages={setSelectedImages}
         newImage={newImage}
         setNewImage={setNewImage}
+        handleAddNewImage={handleAddNewImage}
       />
     </main>
   );
