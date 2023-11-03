@@ -1,41 +1,15 @@
 import { useState } from "react";
-import Image1 from "../src/assets/images/image-1.webp";
-import Image10 from "../src/assets/images/image-10.jpeg";
-import Image11 from "../src/assets/images/image-11.jpeg";
-import Image2 from "../src/assets/images/image-2.webp";
-import Image3 from "../src/assets/images/image-3.webp";
-import Image4 from "../src/assets/images/image-4.webp";
-import Image5 from "../src/assets/images/image-5.webp";
-import Image6 from "../src/assets/images/image-6.webp";
-import Image7 from "../src/assets/images/image-7.webp";
-import Image8 from "../src/assets/images/image-8.webp";
-import Image9 from "../src/assets/images/image-9.webp";
-import "./App.css";
+import images from "../src/json/mock_images_data.json";
 import GalleryGrid from "./components/GalleryGrid/GalleryGrid";
 import TopBar from "./components/TopBar/TopBar";
 
 function App() {
-  // fake images data using the given images start
-  const [imagesData, setImagesData] = useState([
-    { id: 1, imageSrc: Image1 },
-    { id: 2, imageSrc: Image2 },
-    { id: 3, imageSrc: Image3 },
-    { id: 4, imageSrc: Image4 },
-    { id: 5, imageSrc: Image5 },
-    { id: 6, imageSrc: Image6 },
-    { id: 7, imageSrc: Image7 },
-    { id: 8, imageSrc: Image8 },
-    { id: 9, imageSrc: Image9 },
-    { id: 10, imageSrc: Image10 },
-    { id: 11, imageSrc: Image11 },
-  ]);
-  // fake images data using the given images end
-
   // states start
 
+  const [imagesData, setImagesData] = useState(images);
   const [newImage, setNewImage] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
-  console.log(imagesData);
+
   // states end
 
   // handler functions start
@@ -90,6 +64,8 @@ function App() {
     }
   };
 
+  // handle grid change function
+
   // handler functions end
   return (
     <main>
@@ -107,7 +83,18 @@ function App() {
         newImage={newImage}
         setNewImage={setNewImage}
         handleAddNewImage={handleAddNewImage}
+        setImagesData={setImagesData}
       />
+      {/* <Dnd
+        handleCheckboxChange={handleCheckboxChange}
+        imagesData={imagesData}
+        selectedImages={selectedImages}
+        setSelectedImages={setSelectedImages}
+        newImage={newImage}
+        setNewImage={setNewImage}
+        handleAddNewImage={handleAddNewImage}
+        setImagesData={setImagesData}
+      /> */}
     </main>
   );
 }
