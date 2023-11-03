@@ -8,6 +8,7 @@ function App() {
 
   const [imagesData, setImagesData] = useState(images);
   const [newImage, setNewImage] = useState(null);
+  const [draggedItem, setDraggedItem] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
 
   // states end
@@ -77,6 +78,8 @@ function App() {
       {/* gallery grid section */}
       <GalleryGrid
         handleCheckboxChange={handleCheckboxChange}
+        setDraggedItem={setDraggedItem}
+        draggedItem={draggedItem}
         imagesData={imagesData}
         selectedImages={selectedImages}
         setSelectedImages={setSelectedImages}
@@ -85,16 +88,7 @@ function App() {
         handleAddNewImage={handleAddNewImage}
         setImagesData={setImagesData}
       />
-      {/* <Dnd
-        handleCheckboxChange={handleCheckboxChange}
-        imagesData={imagesData}
-        selectedImages={selectedImages}
-        setSelectedImages={setSelectedImages}
-        newImage={newImage}
-        setNewImage={setNewImage}
-        handleAddNewImage={handleAddNewImage}
-        setImagesData={setImagesData}
-      /> */}
+      {/* <Dnd /> */}
     </main>
   );
 }
