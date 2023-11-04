@@ -2,9 +2,13 @@
 
 [Live Site Link](https://image-gallery-dnd-by-mezan.netlify.app)
 
-### Description
+### Features
 
-Hello there, this is a simple react image gallery with the draga and drop functionality. There are some dummy images I added and there a user have the access to delete the images, the user can select signle particular image or he can select all images by clicking on the select all images button. If a user wants to reorder the images he can reorder them by dragging the images as he wants and the interesting part is there we have a featured image also which is indicated by a indicator label and the featured image is larger then other images. I have also implemented the all image feature by clicking in the add new image button a user can add a new image but that will be a temporary add. The design is responsive for all the devices. That's all in that project.
+1. This is a simple react image gallery with the draga and drop functionality.
+2. There are some dummy images I added and there a user have the access to delete the images, the user can select signle particular image or he can select all images by clicking on the select all images button.
+3. If a user wants to reorder the images he can reorder them by dragging the images as he wants and the interesting part is there we have a featured image also which is indicated by a indicator label and the featured image is larger then other images.
+4. I have also implemented the add image feature by clicking in the add new image button a user can add a new image but that will be a temporary add.
+5. The design is responsive for all the devices. That's all in that project.
 
 ### Technologies User
 
