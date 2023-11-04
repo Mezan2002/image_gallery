@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 const AddNewImage = ({ newImage, handleAddNewImage }) => {
   return (
     <div>
+      {/* label of new adding image */}
       <label className="w-full h-96 aspect-square group relative">
-        <div className="h-[290px] overflow-hidden rounded-3xl border-dashed border-2">
+        <div className="md:h-[290px] h-[155px] overflow-hidden rounded-3xl border-dashed border-2">
           {newImage === null ? (
             <>
               {" "}
@@ -17,6 +18,7 @@ const AddNewImage = ({ newImage, handleAddNewImage }) => {
                 </h2>
                 <figure>
                   <img
+                    draggable={false}
                     loading="lazy"
                     src="https://i.ibb.co/4WHRpmx/image-10.png"
                     alt=""
@@ -33,6 +35,7 @@ const AddNewImage = ({ newImage, handleAddNewImage }) => {
             </>
           ) : (
             <img
+              draggable={false}
               loading="lazy"
               src={newImage}
               alt=""
@@ -44,6 +47,7 @@ const AddNewImage = ({ newImage, handleAddNewImage }) => {
     </div>
   );
 };
+
 // vite gives some type error that why those codes
 AddNewImage.propTypes = {
   handleAddNewImage: PropTypes.func.isRequired,

@@ -3,7 +3,9 @@ import {
   DragOverlay,
   KeyboardSensor,
   MeasuringStrategy,
+  MouseSensor,
   PointerSensor,
+  TouchSensor,
   closestCenter,
   useSensor,
   useSensors,
@@ -15,6 +17,7 @@ import {
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import AddNewImage from "../AddNewImage/AddNewImage";
 import SingleImage from "../SingleImage/SingleImage";
 import "./GalleryGrid.css";
@@ -25,66 +28,81 @@ const GalleryGrid = ({
   selectedImages,
   handleAddNewImage,
   newImage,
-  draggedItem,
-  setDraggedItem,
   setSelectedImages,
   setImagesData,
 }) => {
+  // states
+  const [draggedItem, setDraggedItem] = useState(null);
+
+  // sensors attribute of dnd context
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, { activationConstraint: { distance: 50 } }),
+    useSensor(MouseSensor, {
+      activationConstraint: { distance: 50 },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 500, tolerance: 5 },
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
 
+  // handler functions start
+
+  // on drag start attribute of dnd context
   const onDragStart = (data) => {
     const draggedImage = imagesData?.find((img) => img?.id === data.active.id);
     setDraggedItem(draggedImage);
   };
 
+  // on drag end attribute of dnd context
   const onDragEnd = (data) => {
-    // console.log(data)
     const { active, over } = data;
-    if (!over) return;
-    if (active.id === over.id) return;
-    const image = (imageFiles) => {
-      const activeObj = imageFiles.find((img) => img.id === active.id);
-      return imageFiles
-        .toSpliced(
-          imageFiles.findIndex((img) => img.id === active.id),
-          1
-        )
-        .toSpliced(
-          imageFiles.findIndex((img) => img.id === over.id),
-          0,
-          activeObj
-        );
-    };
-    setImagesData(image);
-    setDraggedItem(null);
+
+    if (!over || active.id === over.id) {
+      return;
+    }
+
+    const activeIndex = imagesData?.findIndex((img) => img.id === active.id);
+    const overIndex = imagesData?.findIndex((img) => img.id === over.id);
+
+    if (activeIndex !== -1 && overIndex !== -1) {
+      const newImagesData = [...imagesData];
+      const activeObj = newImagesData[activeIndex];
+      newImagesData.splice(activeIndex, 1);
+      newImagesData.splice(overIndex, 0, activeObj);
+      setImagesData(newImagesData);
+      setDraggedItem(null);
+    }
   };
 
-  const handleDragCancel = () => setDraggedItem(null);
+  // on drag cancel attribute of dnd context
+  const onDragCancel = () => setDraggedItem(null);
+
+  // handler functions end
   return (
     <section className="p-8">
-      {/* drag and drop main container */}
+      {/* dnd context drag and drop main container */}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
-        onDragCancel={handleDragCancel}
+        onDragCancel={onDragCancel}
         measuring={{
           droppable: {
             strategy: MeasuringStrategy.Always,
           },
         }}
       >
+        {/* sortable context of dnd kit */}
         <SortableContext items={imagesData} strategy={rectSortingStrategy}>
           {/* main grid */}
           <div className="container grid grid-cols-2 mx-auto md:grid-cols-4 lg:grid-cols-5 gap-4">
             {/* images data loopings by using map */}
             {imagesData?.map(({ id, imageSrc }, index) => (
+              // single image component for looping the images
               <SingleImage
                 key={id}
                 id={id}
@@ -95,24 +113,28 @@ const GalleryGrid = ({
                 handleCheckboxChange={handleCheckboxChange}
               />
             ))}
-            {/* abstract element to show on drag */}
+
+            {/* an overlay when I will drag an image */}
             <DragOverlay
+              zIndex={10}
               dropAnimation={{
                 duration: 500,
                 easing: "cubic-bezier(0.18, 0.67, 0.6, 1.22)",
               }}
               adjustScale={true}
               modifiers={[restrictToWindowEdges]}
-              className="rounded-2xl bg-white shadow-xl overflow-hidden cursor-grabbing"
+              className="rounded-3xl bg-white shadow-xl overflow-hidden cursor-grabbing"
             >
               {draggedItem && (
                 <img
+                  draggable={false}
                   className="w-full object-cover object-center aspect-square"
                   alt={draggedItem?.id}
                   src={draggedItem?.imageSrc}
                 />
               )}
             </DragOverlay>
+
             {/* add new image box */}
             <AddNewImage
               newImage={newImage}
@@ -128,13 +150,11 @@ const GalleryGrid = ({
 GalleryGrid.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired,
   setImagesData: PropTypes.func.isRequired,
-  setDraggedItem: PropTypes.func.isRequired,
   setSelectedImages: PropTypes.func.isRequired,
   imagesData: PropTypes.array.isRequired,
   selectedImages: PropTypes.array.isRequired,
   handleAddNewImage: PropTypes.func.isRequired,
   newImage: PropTypes.string,
-  draggedItem: PropTypes.number,
 };
 
 export default GalleryGrid;

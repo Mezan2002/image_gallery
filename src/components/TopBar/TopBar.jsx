@@ -1,9 +1,11 @@
+import PropTypes from "prop-types";
 const TopBar = ({ selectedImages, handleDeleteSelectedImages }) => {
   return (
     <section className="sticky top-0 z-50 bg-white flex items-center justify-between border-b py-4 px-8">
       {selectedImages.length > 0 ? (
         <div className="flex items-center">
           <img
+            draggable={false}
             src="https://i.ibb.co/bb9xyLQ/icons8-tick-80-1.png"
             alt="Tick Mark Ticked"
             className="md:w-6 w-4"
@@ -27,6 +29,11 @@ const TopBar = ({ selectedImages, handleDeleteSelectedImages }) => {
       )}
     </section>
   );
+};
+
+TopBar.propTypes = {
+  handleDeleteSelectedImages: PropTypes.func.isRequired,
+  selectedImages: PropTypes.array.isRequired,
 };
 
 export default TopBar;

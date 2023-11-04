@@ -1,4 +1,4 @@
-/* common */
+/* ribbon common */
 .ribbon-featured {
   width: 150px;
   height: 150px;
@@ -27,7 +27,7 @@
   text-align: center;
 }
 
-/* top right*/
+/* ribbon top right */
 .ribbon-top-right {
   top: -10px;
   right: -10px;

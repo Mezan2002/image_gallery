@@ -1,16 +1,15 @@
 import { useState } from "react";
 import images from "../src/json/mock_images_data.json";
-import GalleryGrid from "./components/GalleryGrid/GalleryGrid";
 import TopBar from "./components/TopBar/TopBar";
 
-function App() {
-  // states
+export function App() {
+  // states start
   const [imagesData, setImagesData] = useState(images);
   const [newImage, setNewImage] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
 
+  // states end
   // handler functions start
-
   // checkbox handler
   const handleCheckboxChange = (isChecked, imageId) => {
     // if the image is checked and previously not added on the selected image array then it will add
@@ -36,7 +35,7 @@ function App() {
     }
   };
 
-  // handle adding a new image
+  // function to handle adding a new image
   const handleAddNewImage = (event) => {
     // checking the max id value of the images data array
     const maxId = imagesData.reduce(
@@ -56,12 +55,12 @@ function App() {
       // setting the new data in the images data array in the mutalbe way
       setImagesData([...imagesData, newImageData]);
     };
-    // setting the URL of the new image
     if (file) {
       reader.readAsDataURL(file);
     }
   };
 
+  // handle grid change function
   // handler functions end
   return (
     <main>
@@ -70,20 +69,18 @@ function App() {
         selectedImages={selectedImages}
         handleDeleteSelectedImages={handleDeleteSelectedImages}
       />
-
       {/* gallery grid section */}
-      <GalleryGrid
-        handleCheckboxChange={handleCheckboxChange}
-        imagesData={imagesData}
-        selectedImages={selectedImages}
-        setSelectedImages={setSelectedImages}
-        newImage={newImage}
-        setNewImage={setNewImage}
-        handleAddNewImage={handleAddNewImage}
-        setImagesData={setImagesData}
-      />
+      {/* <GalleryGrid
+              handleCheckboxChange={handleCheckboxChange}
+              imagesData={imagesData}
+              selectedImages={selectedImages}
+              setSelectedImages={setSelectedImages}
+              newImage={newImage}
+              setNewImage={setNewImage}
+              handleAddNewImage={handleAddNewImage}
+              setImagesData={setImagesData}
+            /> */}
+      {/* <Dnd /> */}
     </main>
   );
 }
-
-export default App;
