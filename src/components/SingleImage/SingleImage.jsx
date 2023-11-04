@@ -83,12 +83,14 @@ const SingleImage = ({
         {/* tick images link if the id is in the array then it will show the green ticked icon and if not then it will show a white tick icon */}
         {selectedImages.includes(id) ? (
           <img
+            draggable={false}
             src="https://i.ibb.co/bb9xyLQ/icons8-tick-80-1.png"
             alt="Tick Mark Ticked"
             className="cursor-pointer"
           />
         ) : (
           <img
+            draggable={false}
             src="https://i.ibb.co/Px0CxkP/icons8-tick-80.png"
             alt="Tick Mark Unticked"
             className="cursor-pointer"

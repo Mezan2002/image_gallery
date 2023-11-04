@@ -1,12 +1,13 @@
 import { useState } from "react";
+import Swal from "sweetalert2";
 import images from "../src/json/mock_images_data.json";
 import GalleryGrid from "./components/GalleryGrid/GalleryGrid";
 import TopBar from "./components/TopBar/TopBar";
 
 function App() {
   // states
-  const [imagesData, setImagesData] = useState(images);
   const [newImage, setNewImage] = useState(null);
+  const [imagesData, setImagesData] = useState(images);
   const [selectedImages, setSelectedImages] = useState([]);
 
   // handler functions start
@@ -25,15 +26,39 @@ function App() {
 
   // handle delete selected images
   const handleDeleteSelectedImages = (selectedImagesId) => {
-    if (selectedImagesId.length > 0) {
-      // removing the selected images
-      const updatedImages = imagesData.filter(
-        (image) => !selectedImagesId.includes(image.id)
-      );
-      setImagesData(updatedImages);
-      // Clear the selected images after deleting
-      setSelectedImages([]);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (selectedImagesId.length > 0) {
+          // removing the selected images
+          const updatedImages = imagesData.filter(
+            (image) => !selectedImagesId.includes(image.id)
+          );
+          setImagesData(updatedImages);
+          // Clear the selected images after deleting
+          setSelectedImages([]);
+          Swal.fire("Deleted!", "", "success");
+        }
+      }
+    });
+  };
+
+  // handle select all images
+  const handleSelectAll = () => {
+    const allImageIds = imagesData.map((image) => image.id);
+    setSelectedImages(allImageIds);
+  };
+
+  // handle un select all images
+  const handleUnSelectAll = () => {
+    setSelectedImages([]);
   };
 
   // handle adding a new image
@@ -69,6 +94,9 @@ function App() {
       <TopBar
         selectedImages={selectedImages}
         handleDeleteSelectedImages={handleDeleteSelectedImages}
+        handleSelectAll={handleSelectAll}
+        imagesData={imagesData}
+        handleUnSelectAll={handleUnSelectAll}
       />
 
       {/* gallery grid section */}

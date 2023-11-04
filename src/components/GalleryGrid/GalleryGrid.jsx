@@ -135,13 +135,27 @@ const GalleryGrid = ({
             </DragOverlay>
 
             {/* add new image box */}
-            <AddNewImage
-              newImage={newImage}
-              handleAddNewImage={handleAddNewImage}
-            />
+            {imagesData.length !== 0 && (
+              <AddNewImage
+                newImage={newImage}
+                handleAddNewImage={handleAddNewImage}
+                imagesData={imagesData}
+              />
+            )}
           </div>
         </SortableContext>
       </DndContext>
+
+      {imagesData.length === 0 && (
+        <div className="">
+          <AddNewImage
+            newImage={newImage}
+            handleAddNewImage={handleAddNewImage}
+            imagesData={imagesData}
+            isImageDataEmpty={true}
+          />
+        </div>
+      )}
     </section>
   );
 };
