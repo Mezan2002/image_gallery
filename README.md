@@ -1,6 +1,6 @@
 # React Image Gallery with DND
 
-[Live Site Link](https://image-gallery-dnd-by-mezan.netlify.app “Live Site Link”)
+[Live Site Link](https://image-gallery-dnd-by-mezan.netlify.app)
 
 ### Description
 
