@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Logo from "../../assets/images/gallery.png";
 const TopBar = ({
   selectedImages,
   handleDeleteSelectedImages,
@@ -22,11 +23,7 @@ const TopBar = ({
         </div>
       ) : (
         <div className="flex items-center">
-          <img
-            src="../../assets/images/gallery.png"
-            alt="Logo"
-            className="mr-3"
-          />
+          <img src={Logo} alt="Logo" className="mr-3" />
           <h1 className="md:text-xl text-sm font-semibold uppercase">
             Image Gallery
           </h1>
