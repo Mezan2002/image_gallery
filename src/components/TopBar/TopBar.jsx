@@ -22,7 +22,11 @@ const TopBar = ({
         </div>
       ) : (
         <div className="flex items-center">
-          <img src="../../../public/gallery.png" alt="Logo" className="mr-3" />
+          <img
+            src="../../assets/images/gallery.png"
+            alt="Logo"
+            className="mr-3"
+          />
           <h1 className="md:text-xl text-sm font-semibold uppercase">
             Image Gallery
           </h1>
