@@ -98,7 +98,7 @@ const GalleryGrid = ({
         {/* sortable context of dnd kit */}
         <SortableContext items={imagesData} strategy={rectSortingStrategy}>
           {/* main grid */}
-          <div className="container grid grid-cols-2 mx-auto md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="2xl:max-w-7xl xl:max-w-5xl container grid grid-cols-2 mx-auto md:grid-cols-4 lg:grid-cols-5 gap-4">
             {/* images data loopings by using map */}
             {imagesData?.map(({ id, imageSrc }, index) => (
               // single image component for looping the images
