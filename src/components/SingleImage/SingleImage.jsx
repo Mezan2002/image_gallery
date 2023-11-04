@@ -98,6 +98,7 @@ const SingleImage = ({
     </label>
   );
 };
+
 // vite gives some type error that why those codes
 SingleImage.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired,

@@ -20,7 +20,6 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import AddNewImage from "../AddNewImage/AddNewImage";
 import SingleImage from "../SingleImage/SingleImage";
-import "./GalleryGrid.css";
 
 const GalleryGrid = ({
   handleCheckboxChange,
@@ -146,6 +145,7 @@ const GalleryGrid = ({
     </section>
   );
 };
+
 // vite gives some type error that why those codes
 GalleryGrid.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired,
