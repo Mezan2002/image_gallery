@@ -5,7 +5,7 @@ const AddNewImage = ({ newImage, handleAddNewImage }) => {
     <div>
       {/* label of new adding image */}
       <label className="w-full h-full aspect-square group relative">
-        <div className="h-full min-h-[150px] w-full overflow-hidden rounded-3xl border-dashed border-2">
+        <div className="md:h-full h-[150px] w-full overflow-hidden rounded-3xl border-dashed border-2">
           {newImage === null ? (
             <>
               {" "}
