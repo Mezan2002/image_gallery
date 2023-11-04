@@ -21,9 +21,12 @@ const TopBar = ({
           </h1>
         </div>
       ) : (
-        <h1 className="md:text-2xl text-sm font-semibold uppercase">
-          Image Gallery
-        </h1>
+        <div className="flex items-center">
+          <img src="/public/gallery.png" alt="Logo" className="mr-3" />
+          <h1 className="md:text-xl text-sm font-semibold uppercase">
+            Image Gallery
+          </h1>
+        </div>
       )}
       {/* large device buttons */}
       <div className="md:block hidden">
