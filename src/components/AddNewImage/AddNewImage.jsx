@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 const AddNewImage = ({ newImage, handleAddNewImage }) => {
   return (
     <div>
-      <label className="w-full h-full rounded-3xl shadow-md border-dashed border-2 min-h-48 aspect-square group relative">
-        <div className="h-full overflow-hidden rounded-md">
+      <label className="w-full h-96 aspect-square group relative">
+        <div className="h-[290px] overflow-hidden rounded-3xl border-dashed border-2">
           {newImage === null ? (
             <>
               {" "}

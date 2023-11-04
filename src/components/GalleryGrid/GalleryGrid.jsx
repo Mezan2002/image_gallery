@@ -129,6 +129,7 @@ GalleryGrid.propTypes = {
   handleCheckboxChange: PropTypes.func.isRequired,
   setImagesData: PropTypes.func.isRequired,
   setDraggedItem: PropTypes.func.isRequired,
+  setSelectedImages: PropTypes.func.isRequired,
   imagesData: PropTypes.array.isRequired,
   selectedImages: PropTypes.array.isRequired,
   handleAddNewImage: PropTypes.func.isRequired,
